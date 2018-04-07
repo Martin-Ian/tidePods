@@ -1,8 +1,9 @@
-# tidePods
+Project tidePods
 
-Project Information goes here.
+maybe a space game or something
 
-SpaceGame
+make with C++ and SFML using Visual Studio 2017
+
 
 
 
