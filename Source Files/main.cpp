@@ -21,34 +21,106 @@
 using namespace std;
 using namespace sf;
 
+//process events
+void UserInput() {
+	while (game.isOpen()) {
+		sf::Event event;
+		while (game.pollEvent(event)) {
+			switch (event.type) {
+			case sf::Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					//primary click
+					posx = event.mouseButton.x;
+					posy = event.mouseButton.y;
+				}
+				else if (event.mouseButton.button == sf::Mouse::Right) {
+					//secondary click
+					//event.mouseButton.x
+					//event.mouseButton.y
+				}
+				else if (event.mouseButton.button == sf::Mouse::Middle) {
+					//mousewheel click
+					//event.mouseButton.x
+					//event.mouseButton.y
+				}
+				break;
+			case sf::Event::MouseMoved:
+				//event.mouseMove.x
+				//event.mouseMove.y
+				break;
+			case sf::Event::KeyPressed:
+				switch (event.key.code) {
+				case sf::Keyboard::W:
+					//
+
+					break;
+				case sf::Keyboard::A:
+					//
+
+					break;
+				case sf::Keyboard::S:
+					//
+
+					break;
+				case sf::Keyboard::D:
+					//
+
+					break;
+				case sf::Keyboard::Escape:
+					//
+
+					break;
+				default:
+					break;
+				}
+				break;
+			case sf::Event::MouseWheelScrolled:
+				if (event.mouseWheelScroll.delta > 0) {
+					//scroll up
+				}
+				else if (event.mouseWheelScroll.delta < 0) {
+					//scroll down
+				}
+				break;
+			case sf::Event::Closed:
+				game.close();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
 
 int main() {
 	//define stuff
     sf::RenderWindow game(sf::VideoMode(640, 400), "tidePods");
 	sf::Clock clock;
-	
+	int posx = 0;
+	int posy = 0;
+
 	//game settings
-	game.setFramerateLimit(120); // Limit to 60 frames per second
+	game.setFramerateLimit(120); // Limit frames per second
 	game.setVerticalSyncEnabled(false); // False by default
 
 	// a sample shape
-	sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+	sf::CircleShape shape(10.f);
+    shape.setFillColor(sf::Color::Red);
+
+	sf::Thread thread(&UserInput);
+	thread.launch();
 
 
     while (game.isOpen()) {
-		//process events
-        sf::Event event;
-        while (game.pollEvent(event)) {
-			//close window
-            if (event.type == sf::Event::Closed)
-                game.close();
-        }
+        
+
+		cout << posx << endl;
+		cout << posy << endl;
 
 		// Get elapsed time since last loop
 		sf::Time elapsed1 = clock.getElapsedTime();
 		float FrameRate = 1.f / elapsed1.asSeconds();
-		std::cout << FrameRate << std::endl;
+		//cout << FrameRate << endl;
 		clock.restart();
 
 
